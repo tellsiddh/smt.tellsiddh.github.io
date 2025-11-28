@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Stats counter animation for homepage
-    const statsCounters = document.querySelectorAll('.stat-item h3');
+    const statsCounters = document.querySelectorAll('.stat-item h3, .stat-number, .stat-value, .cap-number');
     const countUpObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -163,6 +163,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     statsCounters.forEach(counter => {
         countUpObserver.observe(counter);
+    });
+    
+    // Floating achievements parallax effect
+    window.addEventListener('scroll', function() {
+        const achievements = document.querySelector('.floating-achievements');
+        if (achievements && window.innerWidth > 768) {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            achievements.style.transform = `translateY(calc(-50% + ${rate}px))`;
+        }
+    });
+    
+    // Partner items hover effect
+    document.querySelectorAll('.partner-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.05)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
     });
 
     function animateCounter(element, target) {

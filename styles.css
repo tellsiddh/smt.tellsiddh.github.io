@@ -7,6 +7,7 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -14,12 +15,16 @@ body {
     line-height: 1.6;
     color: #333;
     background-color: #fff;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Header and Navigation */
@@ -109,9 +114,26 @@ body {
     padding: 120px 0 80px;
     text-align: center;
     position: relative;
-    min-height: 90vh;
+    min-height: 95vh;
     display: flex;
     align-items: center;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('images/hero.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 100;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero-bg-overlay {
@@ -120,8 +142,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(44, 90, 160, 0.85) 0%, rgba(30, 61, 114, 0.85) 100%);
-    z-index: 1;
+    /* background: linear-gradient(135deg, rgba(214, 214, 214, 0.85) 0%, rgba(30, 61, 114, 0.85) 100%); */
+    z-index: 2;
 }
 
 .hero-content {
@@ -129,7 +151,7 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 .hero-badge {
@@ -166,7 +188,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 3.8rem;
+    font-size: 4.2rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.1;
@@ -309,6 +331,488 @@ body {
     color: #2c5aa0;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Floating Achievements */
+.floating-achievements {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 3;
+}
+
+.achievement-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.achievement-badge:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.badge-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #ff6b35;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.badge-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Trusted Partners Section */
+.trusted-partners {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.partners-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.primary-partner {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    border: 3px solid #ff6b35;
+    position: relative;
+    overflow: hidden;
+}
+
+.primary-partner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #ff6b35, #2c5aa0);
+}
+
+.partner-highlight {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.primary-logo {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.partner-info h3 {
+    color: #2c5aa0;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.partner-info p {
+    color: #1e3d72;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.partnership-badge {
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.secondary-partners {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.partner-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.partner-item:hover {
+    border-color: #2c5aa0;
+    transform: translateY(-5px);
+    background: white;
+    box-shadow: 0 8px 25px rgba(44, 90, 160, 0.15);
+}
+
+.partner-item img {
+    width: 120px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    filter: grayscale(50%) opacity(0.8);
+    transition: filter 0.3s ease;
+}
+
+.partner-item:hover img {
+    filter: grayscale(0%) opacity(1);
+}
+
+.partner-item span {
+    display: block;
+    color: #2c5aa0;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Enhanced Business Highlights */
+.warehouse-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.warehouse-main {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    border-radius: 20px;
+}
+
+.warehouse-content h3 {
+    color: #ff6b35;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.warehouse-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+}
+
+.warehouse-locations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.location-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.location-card h4 {
+    color: #ff6b35;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.location-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.location-stat {
+    text-align: center;
+}
+
+.location-stat .stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.location-stat .stat-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.warehouse-visual {
+    position: relative;
+}
+
+.warehouse-images {
+    display: grid;
+    gap: 1rem;
+}
+
+.warehouse-image {
+    width: 100%;
+    height: 195px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.warehouse-badge {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.warehouse-badge span {
+    display: block;
+    font-weight: 600;
+}
+
+.warehouse-badge span:first-child {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.warehouse-badge span:last-child {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Warehouse Locations Section */
+.warehouse-locations {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    width: 100%;
+    clear: both;
+    display: block;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    justify-items: center;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.location-detail {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.location-header {
+    background: linear-gradient(135deg, #2c5aa0 0%, #1e3d72 100%);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.location-badge {
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.location-badge.secondary {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.location-content {
+    padding: 2rem;
+}
+
+.location-info {
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item strong {
+    color: #2c5aa0;
+    min-width: 140px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.info-item span {
+    color: #666;
+    flex: 1;
+}
+
+.location-map iframe {
+    transition: all 0.3s ease;
+}
+
+.location-map:hover iframe {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.network-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.network-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.stat-content .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c5aa0;
+    margin-bottom: 0.25rem;
+}
+
+.stat-content .stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Enhanced Testimonials */
+.testimonial-card.featured {
+    border: 3px solid #ff6b35;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+}
+
+.recognition-badges {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.recognition-badges h3 {
+    color: white;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.recognition-badge {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.recognition-badge:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.recognition-badge .badge-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-bottom: 0.5rem;
+}
+
+.recognition-badge .badge-year {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.recognition-badge .badge-org {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
 }
 
 /* Jindal Partnership Section */
@@ -857,22 +1361,74 @@ section h2 {
 
 /* Footer */
 footer {
-    background: #333;
+    background: linear-gradient(135deg, #1e3d72 0%, #2c5aa0 100%);
     color: white;
-    padding: 3rem 0 1rem;
+    padding: 4rem 0 1rem;
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 3rem;
+    margin-bottom: 3rem;
 }
 
 .footer-section h3,
 .footer-section h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     color: #fff;
+    font-weight: 600;
+}
+
+.footer-section h3 {
+    font-size: 1.5rem;
+    color: #ff6b35;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-company-logo {
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.footer-contact p {
+    margin-bottom: 0.8rem;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-warehouses {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.footer-warehouse {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 3px solid #ff6b35;
+}
+
+.footer-warehouse h5 {
+    color: #ff6b35;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.footer-warehouse p {
+    color: #e0e0e0;
+    font-size: 0.85rem;
+    margin: 0;
 }
 
 .footer-section ul {
@@ -880,24 +1436,120 @@ footer {
 }
 
 .footer-section ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    color: #e0e0e0;
+    padding-left: 1rem;
+    position: relative;
 }
 
-.footer-section ul li a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
+.footer-section ul li:before {
+    content: "▸";
+    color: #ff6b35;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
 }
 
-.footer-section ul li a:hover {
-    color: #fff;
+.footer-partners {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.footer-partner-logo {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-partner-logo:hover {
+    opacity: 1;
+}
+
+.footer-certifications {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cert-badge {
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.footer-gallery {
+    margin-bottom: 2rem;
+}
+
+.footer-gallery h4 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #ff6b35;
+    font-size: 1.3rem;
+}
+
+.footer-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.footer-images img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0.8;
+}
+
+.footer-images img:hover {
+    border-color: #ff6b35;
+    opacity: 1;
 }
 
 .footer-bottom {
-    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     padding-top: 2rem;
-    border-top: 1px solid #555;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: #ff6b35;
+}
+
+.footer-bottom p {
     color: #ccc;
+    margin: 0;
+    font-size: 0.9rem;
 }
 
 /* Page Header */
@@ -979,6 +1631,7 @@ footer {
 /* Product Categories */
 .product-categories {
     padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .section-subtitle {
@@ -986,42 +1639,111 @@ footer {
     font-size: 1.2rem;
     color: #666;
     margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
 }
 
 .category-card {
     background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(45deg, #2c5aa0, #ff6b35);
+    transform: scaleX(0);
     transition: transform 0.3s ease;
 }
 
+.category-card:hover::before {
+    transform: scaleX(1);
+}
+
 .category-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(44, 90, 160, 0.15);
+    border-color: #2c5aa0;
+}
+
+.category-card.featured {
+    border: 2px solid #ff6b35;
+    background: linear-gradient(135deg, #fff 0%, #fffbf7 100%);
+    transform: scale(1.02);
+}
+
+.category-card.featured::before {
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    transform: scaleX(1);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: -25px;
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 0.5rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transform: rotate(35deg);
+    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.3);
 }
 
 .category-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .category-card h3 {
     color: #2c5aa0;
     margin-bottom: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .category-card p {
     color: #666;
     line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.category-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.category-specs span {
+    color: #2c5aa0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
 }
 
 .view-products-btn-container {
@@ -1030,18 +1752,39 @@ footer {
 
 .view-products-btn {
     display: inline-block;
-    background: #ff6b35;
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
     color: white;
-    padding: 15px 30px;
+    padding: 18px 40px;
     text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.view-products-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.view-products-btn:hover::before {
+    left: 100%;
 }
 
 .view-products-btn:hover {
-    background: #e55a2b;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
 }
 
 /* Certifications & Partnerships */
@@ -1311,56 +2054,182 @@ footer {
 .cta-section {
     background: linear-gradient(135deg, #2c5aa0 0%, #1e3d72 100%);
     color: white;
-    text-align: center;
-    padding: 80px 0;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.cta-section h2 {
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1920&h=800&fit=crop') center/cover;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.cta-text h2 {
     color: white;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    text-align: left;
 }
 
-.cta-section p {
-    font-size: 1.2rem;
+.cta-text p {
+    font-size: 1.3rem;
     margin-bottom: 2rem;
-    opacity: 0.9;
+    opacity: 0.95;
+    line-height: 1.6;
+}
+
+.cta-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cta-highlight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.cta-highlight:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(10px);
+}
+
+.highlight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.cta-actions {
+    text-align: center;
 }
 
 .cta-buttons {
     display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .cta-primary,
 .cta-secondary {
-    padding: 15px 30px;
-    border-radius: 5px;
+    display: block;
+    padding: 20px 30px;
+    border-radius: 15px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
 }
 
 .cta-primary {
-    background: #ff6b35;
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
     color: white;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
 }
 
 .cta-primary:hover {
-    background: #e55a2b;
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(255, 107, 53, 0.6);
 }
 
 .cta-secondary {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    border: 2px solid white;
 }
 
 .cta-secondary:hover {
     background: white;
     color: #2c5aa0;
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(255, 255, 255, 0.3);
+}
+
+.cta-primary span,
+.cta-secondary span {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.cta-primary small,
+.cta-secondary small {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.trust-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    border-radius: 15px;
+}
+
+.trust-logo {
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.trust-badge {
+    background: linear-gradient(45deg, #ff6b35, #e55a2b);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.trust-item span:last-child {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    font-weight: 500;
 }
 
 /* Testimonials Section */
@@ -2316,6 +3185,22 @@ footer {
         max-width: 300px;
     }
     
+    .cta-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .cta-text h2 {
+        text-align: center;
+        font-size: 2.2rem;
+    }
+    
+    .trust-indicators {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
     .gallery-grid {
         grid-template-columns: 1fr;
     }
@@ -2397,6 +3282,152 @@ footer {
 
     .jindal-main-logo {
         max-width: 200px;
+    }
+    
+    .floating-achievements {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+    
+    .achievement-badge {
+        padding: 1rem 1.5rem;
+    }
+    
+    .partners-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .partner-highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .primary-logo {
+        width: 120px;
+    }
+    
+    .capabilities-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .capability-stats {
+        gap: 1rem;
+    }
+    
+    .cap-stat {
+        min-width: 120px;
+        padding: 1rem;
+    }
+    
+    .warehouse-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .warehouse-locations {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .locations-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .location-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .network-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .recognition-badges .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Warehouse Page Mobile Styles */
+    .warehouse-hero {
+        padding: 120px 0 80px;
+        margin-top: 60px;
+        overflow-x: hidden;
+    }
+    
+    .warehouse-hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .warehouse-hero-content p {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+    
+    .warehouses-detail {
+        padding: 60px 10px;
+    }
+    
+    .warehouse-details {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .warehouse-info {
+        padding: 30px 20px;
+    }
+    
+    .warehouse-info h2 {
+        font-size: 1.8rem;
+    }
+    
+    .warehouse-map {
+        padding: 20px;
+        margin: 0 -20px;
+    }
+    
+    .warehouse-map iframe {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .warehouse-stats {
+        padding: 40px 20px;
+        margin: 40px 10px;
+    }
+    
+    .warehouse-stats h2 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        padding: 0 10px;
+    }
+    
+    .logistics-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .logistics-section {
+        padding: 40px 20px;
+    }
+    
+    .logistics-section h2 {
+        font-size: 2rem;
+    }
+    
+    .logistics-card {
+        padding: 20px;
     }
 }
 
@@ -2515,4 +3546,443 @@ footer {
     .business-highlights h2 {
         font-size: 2rem;
     }
+    
+    .floating-achievements {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .achievement-badge {
+        padding: 0.8rem 1.2rem;
+        min-width: 180px;
+    }
+    
+    .badge-title {
+        font-size: 1rem;
+    }
+    
+    .partners-showcase {
+        gap: 1.5rem;
+    }
+    
+    .primary-partner {
+        padding: 2rem;
+    }
+    
+    .partner-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .capability-main {
+        padding: 2rem;
+    }
+    
+    .capability-content h3 {
+        font-size: 1.8rem;
+    }
+    
+    .capability-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .facility-image {
+        height: 300px;
+    }
+    
+    .warehouse-main {
+        padding: 2rem;
+    }
+    
+    .warehouse-content h3 {
+        font-size: 1.8rem;
+    }
+    
+    .warehouse-locations {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .location-card {
+        padding: 1rem;
+    }
+    
+    .location-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .network-stats {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+    
+    .network-stat {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .recognition-badges .badges-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .cta-highlights {
+        gap: 0.8rem;
+    }
+    
+    .cta-highlight {
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .trust-item {
+        padding: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-images {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .footer-links {
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    /* Warehouse Page Mobile Styles - Small Screens */
+    .warehouse-hero {
+        padding: 100px 0 60px;
+        margin-top: 60px;
+        overflow-x: hidden;
+    }
+    
+    .warehouse-hero-content h1 {
+        font-size: 2.2rem;
+        padding: 0 15px;
+    }
+    
+    .warehouse-hero-content p {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
+    .warehouses-detail {
+        padding: 40px 10px;
+    }
+    
+    .warehouse-info {
+        padding: 20px 15px;
+    }
+    
+    .warehouse-info h2 {
+        font-size: 1.6rem;
+    }
+    
+    .warehouse-map {
+        padding: 15px 10px;
+        margin: 0 -15px;
+    }
+    
+    .warehouse-map iframe {
+        width: 100%;
+        max-width: 100%;
+        height: 250px;
+    }
+    
+    .warehouse-stats {
+        padding: 30px 15px;
+        margin: 30px 5px;
+    }
+    
+    .warehouse-stats h2 {
+        font-size: 1.8rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 5px;
+    }
+    
+    .stat-number {
+        font-size: 1.8rem;
+    }
+    
+    .logistics-section {
+        padding: 30px 15px;
+    }
+    
+    .logistics-section h2 {
+        font-size: 1.8rem;
+    }
+    
+    .logistics-card {
+        padding: 15px;
+    }
+    
+    .logistics-card h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Warehouse Pages Specific Styles */
+/* Warehouse Hero Section */
+.warehouse-hero {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    padding: 150px 0 100px;
+    text-align: center;
+    color: white;
+    margin-top: 80px;
+}
+
+.warehouse-hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.warehouse-hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Warehouse Detail Section */
+.warehouses-detail {
+    padding: 80px 0;
+    background: #f8f9fa;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.warehouses-detail .warehouse-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.warehouses-detail .warehouse-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: left;
+    backdrop-filter: none;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.warehouses-detail .warehouse-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.warehouse-image {
+    height: 300px;
+    overflow: hidden;
+}
+
+.warehouse-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.warehouse-card:hover .warehouse-image img {
+    transform: scale(1.05);
+}
+
+.warehouse-info {
+    padding: 40px;
+}
+
+.warehouse-info h2 {
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.warehouse-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.detail-item h3 {
+    color: #34495e;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.detail-item p {
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+.detail-item ul {
+    list-style: none;
+    padding: 0;
+}
+
+.detail-item ul li {
+    padding: 5px 0;
+    color: #7f8c8d;
+    position: relative;
+    padding-left: 20px;
+}
+
+.detail-item ul li:before {
+    content: "•";
+    color: #3498db;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.warehouse-map {
+    margin-top: 30px;
+    padding: 30px 40px;
+    background: #ecf0f1;
+    border-radius: 15px;
+}
+
+.warehouse-map h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.warehouse-map iframe {
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+    height: 300px;
+    border: none;
+    box-sizing: border-box;
+}
+
+/* Warehouse Statistics */
+.warehouse-stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 0;
+    margin: 60px 0;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.warehouse-stats h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.stat-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Logistics Section */
+.logistics-section {
+    padding: 60px 0;
+    background: white;
+    border-radius: 20px;
+    margin-top: 40px;
+    overflow-x: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logistics-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 50px;
+}
+
+.logistics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logistics-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid #3498db;
+}
+
+.logistics-card h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.logistics-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.logistics-card ul li {
+    padding: 8px 0;
+    color: #7f8c8d;
+    position: relative;
+    padding-left: 25px;
+    line-height: 1.5;
+}
+
+.logistics-card ul li:before {
+    content: "✓";
+    color: #27ae60;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
 }
