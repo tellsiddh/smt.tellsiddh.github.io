@@ -1,0 +1,32 @@
+data:image/svg+xml,<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="600" fill="%23334155"/>
+  <!-- Steel pipes pattern -->
+  <g opacity="0.3">
+    <circle cx="100" cy="150" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="200" cy="150" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="300" cy="150" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="400" cy="150" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="500" cy="150" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    
+    <circle cx="100" cy="250" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="200" cy="250" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="300" cy="250" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="400" cy="250" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="500" cy="250" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    
+    <circle cx="100" cy="350" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="200" cy="350" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="300" cy="350" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="400" cy="350" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+    <circle cx="500" cy="350" r="40" fill="%236b7280" stroke="%23475569" stroke-width="3"/>
+  </g>
+  
+  <!-- Industrial building silhouette -->
+  <g opacity="0.2">
+    <rect x="700" y="400" width="200" height="200" fill="%23475569"/>
+    <rect x="720" y="380" width="30" height="40" fill="%235b6575"/>
+    <rect x="770" y="380" width="30" height="40" fill="%235b6575"/>
+    <rect x="820" y="380" width="30" height="40" fill="%235b6575"/>
+    <rect x="870" y="380" width="30" height="40" fill="%235b6575"/>
+  </g>
+</svg>
