@@ -283,3 +283,32 @@ document.addEventListener('keydown', function(event) {
         closeModal();
     }
 });
+
+// Toggle Details for Modern Product Cards
+function toggleDetails(button) {
+    const card = button.closest('.modern-category-card');
+    const content = card.querySelector('.expandable-content');
+    const isExpanded = content.classList.contains('expanded');
+    
+    // Close all other cards first
+    document.querySelectorAll('.expandable-content.expanded').forEach(item => {
+        if (item !== content) {
+            item.classList.remove('expanded');
+            item.previousElementSibling.classList.remove('active');
+        }
+    });
+    
+    // Toggle current card
+    if (isExpanded) {
+        content.classList.remove('expanded');
+        button.classList.remove('active');
+    } else {
+        content.classList.add('expanded');
+        button.classList.add('active');
+        
+        // Smooth scroll to card
+        setTimeout(() => {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
