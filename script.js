@@ -21,8 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for anchor links (only for same-page links)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const target = document.querySelector(href);
             if (target) {
                 const headerOffset = 80;
                 const elementPosition = target.getBoundingClientRect().top;
@@ -84,31 +87,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add scroll effect to navbar
+    // Add scroll effect to navbar (throttled for performance)
+    let ticking = false;
     window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (navbar) {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.backdropFilter = 'blur(10px)';
-            } else {
-                navbar.style.background = '#fff';
-                navbar.style.backdropFilter = 'none';
-            }
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const navbar = document.querySelector('.navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    } else {
+                        navbar.style.background = '#fff';
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
-    });
+    }, { passive: true });
     
-    // Animate elements on scroll
+    // Animate elements on scroll (optimized)
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('fade-in-visible');
+                observer.unobserve(entry.target); // Stop observing once animated
             }
         });
     }, observerOptions);
@@ -117,9 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('section').forEach(section => {
         // Skip hero and page-header sections from animation
         if (!section.classList.contains('hero') && !section.classList.contains('page-header')) {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            section.classList.add('fade-in-element');
             observer.observe(section);
         }
     });
@@ -129,18 +135,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     cardSelectors.forEach(selector => {
         document.querySelectorAll(selector).forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.classList.add('fade-in-element');
             observer.observe(card);
         });
     });
 
     // Timeline animation for about page
     document.querySelectorAll('.timeline-item').forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateX(-20px)';
-        item.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+        item.classList.add('fade-in-element');
+        item.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(item);
     });
 
@@ -159,32 +162,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-    });
+    }, { threshold: 0.5 });
 
     statsCounters.forEach(counter => {
         countUpObserver.observe(counter);
     });
-    
-    // Floating achievements parallax effect
-    window.addEventListener('scroll', function() {
-        const achievements = document.querySelector('.floating-achievements');
-        if (achievements && window.innerWidth > 768) {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            achievements.style.transform = `translateY(calc(-50% + ${rate}px))`;
-        }
-    });
-    
-    // Partner items hover effect
-    document.querySelectorAll('.partner-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.05)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
+
 
     function animateCounter(element, target) {
         const originalText = element.textContent;
@@ -198,20 +181,25 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isNaN(firstNum) && !isNaN(secondNum)) {
                 let current1 = 0;
                 let current2 = 0;
-                const increment1 = firstNum / 30;
-                const increment2 = secondNum / 30;
+                const duration = 1500; // 1.5 seconds
+                const startTime = performance.now();
                 
-                const timer = setInterval(() => {
-                    current1 += increment1;
-                    current2 += increment2;
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
                     
-                    if (current1 >= firstNum && current2 >= secondNum) {
-                        element.textContent = `${firstNum}/${secondNum}`;
-                        clearInterval(timer);
+                    current1 = Math.floor(progress * firstNum);
+                    current2 = Math.floor(progress * secondNum);
+                    
+                    if (progress < 1) {
+                        element.textContent = `${current1}/${current2}`;
+                        requestAnimationFrame(updateCounter);
                     } else {
-                        element.textContent = `${Math.ceil(current1)}/${Math.ceil(current2)}`;
+                        element.textContent = `${firstNum}/${secondNum}`;
                     }
-                }, 40);
+                }
+                
+                requestAnimationFrame(updateCounter);
                 return;
             }
         }
@@ -221,19 +209,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const numberOnly = originalText.replace(/\D/g, '');
         
         if (numberOnly) {
-            let current = 0;
             const targetNum = parseInt(numberOnly);
-            const increment = targetNum / 50;
+            const duration = 1500; // 1.5 seconds
+            const startTime = performance.now();
             
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= targetNum) {
-                    element.textContent = targetNum + suffix;
-                    clearInterval(timer);
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(progress * targetNum);
+                
+                if (progress < 1) {
+                    element.textContent = current + suffix;
+                    requestAnimationFrame(updateCounter);
                 } else {
-                    element.textContent = Math.ceil(current) + suffix;
+                    element.textContent = targetNum + suffix;
                 }
-            }, 40);
+            }
+            
+            requestAnimationFrame(updateCounter);
         }
     }
 

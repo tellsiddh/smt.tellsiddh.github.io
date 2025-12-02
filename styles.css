@@ -10,6 +10,18 @@ html {
     overflow-x: hidden;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -17,6 +29,34 @@ body {
     background-color: #fff;
     overflow-x: hidden;
     width: 100%;
+}
+
+/* Performance Optimizations */
+img {
+    content-visibility: auto;
+}
+
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hardware acceleration for smooth animations */
+.category-card,
+.product-card,
+.testimonial-card,
+.gallery-item,
+.hero-stats .stat,
+.highlight-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .container {
@@ -35,6 +75,8 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
+    transition: background 0.2s ease;
+    will-change: background;
 }
 
 .nav-container {
@@ -109,7 +151,7 @@ body {
     background: linear-gradient(135deg, rgba(44, 90, 160, 0.95) 0%, rgba(30, 61, 114, 0.95) 100%), url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1920&h=1080&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     color: white;
     padding: 120px 0 80px;
     text-align: center;
@@ -118,6 +160,7 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
+    will-change: auto;
 }
 
 .hero::before {
@@ -158,7 +201,6 @@ body {
     display: inline-flex;
     align-items: center;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 10px 20px;
     border-radius: 50px;
@@ -244,12 +286,11 @@ body {
 .hero-stats .stat {
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 2rem 2.5rem;
     border-radius: 15px;
     min-width: 160px;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .hero-stats .stat:hover {
@@ -271,6 +312,30 @@ body {
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* Text-based stat item (no counter animation) */
+.hero-stats .stat-text-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2rem 2.5rem;
+    border-radius: 15px;
+    min-width: 160px;
+    transition: transform 0.2s ease;
+}
+
+.hero-stats .stat-text-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-text-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff6b35;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-buttons {
@@ -509,7 +574,6 @@ body {
 
 .warehouse-main {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 3rem;
     border-radius: 20px;
@@ -539,7 +603,6 @@ body {
 
 .location-card {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1.5rem;
     border-radius: 15px;
@@ -780,12 +843,11 @@ body {
 
 .recognition-badge {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .recognition-badge:hover {
@@ -1062,7 +1124,7 @@ section h2 {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     aspect-ratio: 16/10;
 }
 
@@ -1079,7 +1141,7 @@ section h2 {
 }
 
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .gallery-overlay {
@@ -1091,7 +1153,7 @@ section h2 {
     color: white;
     padding: 2.5rem 1.5rem 1.5rem;
     transform: translateY(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -1162,7 +1224,7 @@ section h2 {
     padding: 2rem;
     border-radius: 10px;
     border-left: 4px solid #2c5aa0;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .product-card:hover {
@@ -1657,7 +1719,7 @@ footer {
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
     text-align: center;
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
@@ -1672,7 +1734,7 @@ footer {
     height: 4px;
     background: linear-gradient(45deg, #2c5aa0, #ff6b35);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .category-card:hover::before {
@@ -1949,12 +2011,11 @@ footer {
 
 .highlight-card {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .highlight-card:hover {
@@ -2107,11 +2168,10 @@ footer {
     align-items: center;
     gap: 1rem;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1rem 1.5rem;
     border-radius: 50px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .cta-highlight:hover {
@@ -2162,7 +2222,6 @@ footer {
 
 .cta-secondary {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
 }
@@ -2204,7 +2263,6 @@ footer {
     align-items: center;
     gap: 0.5rem;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 1.5rem;
     border-radius: 15px;
@@ -2250,7 +2308,7 @@ footer {
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .testimonial-card:hover {
@@ -3097,37 +3155,90 @@ footer {
         display: flex;
     }
     
-    .hero h1,
-    .page-header h1 {
-        font-size: 2.5rem;
+    .hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+        text-align: center;
     }
     
-    .hero p,
-    .page-header p {
-        font-size: 1.1rem;
+    .hero-content {
+        padding: 0 10px;
+    }
+    
+    .hero h1,
+    .page-header h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        padding: 0 10px;
+    }
+    
+    .tagline-accent {
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .hero-badge {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .badge-logo {
+        width: 70px;
+        margin-left: 10px;
+    }
+    
+    .hero-usps {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .usp-item {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
     }
     
     .hero-stats {
-        gap: 1.5rem;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        justify-content: center;
     }
     
-    .hero-stats .stat {
-        min-width: 120px;
-        padding: 1rem 1.5rem;
+    .hero-stats .stat,
+    .hero-stats .stat-text-item {
+        min-width: 140px;
+        padding: 1.2rem 1rem;
     }
     
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .stat-text-value {
+        font-size: 0.95rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
     }
     
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
     
     .cta-button {
         width: 100%;
         max-width: 280px;
+        padding: 14px 28px;
+        font-size: 0.95rem;
     }
     
     section h2 {
@@ -3440,17 +3551,62 @@ footer {
         padding: 0 15px;
     }
     
-    .hero,
+    .hero {
+        padding: 90px 15px 50px;
+        min-height: auto;
+    }
+    
     .page-header {
         padding: 100px 0 60px;
     }
     
-    .hero h1 {
-        font-size: 2rem;
+    .hero-content {
+        padding: 0 5px;
     }
     
-    .hero p {
-        font-size: 1rem;
+    .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        padding: 0 5px;
+    }
+    
+    .tagline-accent {
+        font-size: 0.75rem;
+    }
+    
+    .hero-badge {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+    
+    .badge-logo {
+        width: 60px;
+        margin-left: 8px;
+    }
+    
+    .hero-usps {
+        gap: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .usp-item {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        max-width: 90%;
+    }
+    
+    .hero-stats {
+        gap: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
     }
     
     section {
@@ -3491,13 +3647,33 @@ footer {
         padding: 1.5rem;
     }
     
-    .hero-stats .stat {
-        min-width: 100px;
-        padding: 0.8rem 1rem;
+    .hero-stats .stat,
+    .hero-stats .stat-text-item {
+        min-width: 90%;
+        max-width: 280px;
+        padding: 1rem 1.5rem;
     }
     
     .stat-number {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
+    }
+    
+    .stat-text-value {
+        font-size: 0.85rem;
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+        max-width: 90%;
     }
     
     .cert-card {
@@ -3807,10 +3983,11 @@ footer {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .warehouse-card:hover .warehouse-image img {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .warehouse-info {
