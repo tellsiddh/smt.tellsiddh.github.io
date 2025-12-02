@@ -250,3 +250,36 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Image Modal Functions
+function openModal(galleryItem) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const caption = document.getElementById('modalCaption');
+    const img = galleryItem.querySelector('img');
+    const info = galleryItem.querySelector('.gallery-info');
+    
+    modal.style.display = 'block';
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    
+    if (info) {
+        caption.innerHTML = `<h3>${info.querySelector('h3').textContent}</h3><p>${info.querySelector('p').textContent}</p>`;
+    }
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
