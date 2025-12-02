@@ -153,7 +153,7 @@ img {
     background-position: center;
     background-attachment: scroll;
     color: white;
-    padding: 120px 0 80px;
+    padding: 120px 0 40px;
     text-align: center;
     position: relative;
     min-height: 95vh;
@@ -684,7 +684,7 @@ img {
 
 /* Warehouse Locations Section */
 .warehouse-locations {
-    padding: 80px 0;
+    padding: 40px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     width: 100%;
     clear: both;
@@ -825,8 +825,9 @@ img {
 }
 
 .recognition-badges {
-    margin-top: 4rem;
+    margin-top: 0;
     text-align: center;
+    padding-top: 60px;
 }
 
 .recognition-badges h3 {
@@ -1692,7 +1693,7 @@ footer {
 
 /* Product Categories */
 .product-categories {
-    padding: 80px 0;
+    padding: 40px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
@@ -1852,7 +1853,7 @@ footer {
 /* Certifications & Partnerships */
 .certifications-partnerships {
     background: #f8f9fa;
-    padding: 80px 0;
+    padding: 20px 0;
 }
 
 .cert-content {
@@ -2084,7 +2085,7 @@ footer {
 /* Why Choose Section */
 .why-choose {
     background: #f8f9fa;
-    padding: 80px 0;
+    padding: 20px 0;
 }
 
 .features-grid {
@@ -2294,6 +2295,11 @@ footer {
 .testimonials {
     padding: 80px 0;
     background: white;
+}
+
+/* Reduced padding when main testimonials content is disabled */
+.testimonials:has(.recognition-badges:first-child) {
+    padding: 0px 0 0px 0;
 }
 
 .testimonials-grid {
@@ -2630,7 +2636,7 @@ footer {
 
 /* Product Page Styles */
 .product-categories-detailed {
-    padding: 80px 0;
+    padding: 40px 0;
 }
 
 .product-category {
