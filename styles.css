@@ -34,6 +34,19 @@ body {
 /* Performance Optimizations */
 img {
     content-visibility: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Defer non-critical images */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded,
+img[loading="lazy"]:not([src*=""]) {
+    opacity: 1;
 }
 
 .fade-in-element {
@@ -154,7 +167,7 @@ img {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(44, 90, 160, 0.95) 0%, rgba(30, 61, 114, 0.95) 100%), url('https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=1920&h=1080&fit=crop');
+    background: linear-gradient(135deg, rgba(44, 90, 160, 0.95) 0%, rgba(30, 61, 114, 0.95) 100%);
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
@@ -176,13 +189,20 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('images/hero.gif');
+    background-image: url('images/hero_fast.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 100;
+    opacity: 0;
     z-index: 1;
     pointer-events: none;
+    transition: opacity 0.5s ease-in;
+    will-change: opacity;
+}
+
+/* Show GIF only after it's loaded */
+.hero.loaded::before {
+    opacity: 1;
 }
 
 .hero-bg-overlay {

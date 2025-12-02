@@ -1,5 +1,42 @@
 // Mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
+    // Lazy load hero GIF for better performance
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        const gifImg = new Image();
+        gifImg.src = 'images/hero_fast.webp';
+        gifImg.onload = function() {
+            hero.classList.add('loaded');
+        };
+        // If image fails to load or takes too long, show it anyway after 3 seconds
+        setTimeout(function() {
+            if (!hero.classList.contains('loaded')) {
+                hero.classList.add('loaded');
+            }
+        }, 3000);
+    }
+
+    // Smooth fade-in for lazy-loaded images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px' // Start loading 50px before entering viewport
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => img.classList.add('loaded'));
+    }
+
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
