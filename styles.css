@@ -2640,6 +2640,12 @@ footer {
     display: block;
     width: 100%;
     background: white;
+    opacity: 1 !important;
+}
+
+/* Ensure product sections are always visible */
+.product-categories-detailed.fade-in-element {
+    opacity: 1 !important;
 }
 
     .product-category {
@@ -2768,6 +2774,13 @@ footer {
 .standards-dimensions {
     background: #f8f9fa;
     padding: 80px 0;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.standards-dimensions.fade-in-element {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .standards-grid {
@@ -2813,6 +2826,13 @@ footer {
 /* Product Quality Section */
 .product-quality {
     padding: 80px 0;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.product-quality.fade-in-element {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .quality-grid {
@@ -2858,6 +2878,13 @@ footer {
 .stock-info {
     background: #f8f9fa;
     padding: 80px 0;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+.stock-info.fade-in-element {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .stock-content {
