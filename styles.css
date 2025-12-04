@@ -240,7 +240,7 @@ img[loading="lazy"]:not([src*=""]) {
     width: 100px;
     margin-left: 15px;
     object-fit: contain;
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
 }
 
 .hero-tagline {
