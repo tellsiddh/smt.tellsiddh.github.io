@@ -467,7 +467,7 @@ img[loading="lazy"]:not([src*=""]) {
     font-weight: 500;
 }
 
-/* Trusted Partners Section */
+/* Authorized Dealer Section */
 .trusted-partners {
     padding: 20px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
