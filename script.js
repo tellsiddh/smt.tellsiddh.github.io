@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const urgent = formData.get('urgent') ? 'YES' : 'NO';
             
             // Create mailto link with detailed information
-            const mailtoLink = `mailto:samirmetal@vsnl.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+            const mailtoLink = `mailto:info@samirmetal.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
                 `ENQUIRY DETAILS\n` +
                 `================\n\n` +
                 `Contact Information:\n` +

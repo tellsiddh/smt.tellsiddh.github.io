@@ -49,4 +49,4 @@ Mumbai - 400 004, India
 
 Phone: +91-22-2382 5388, 2387 3011
 Fax: +91-22-2382 4606
-Email: samirmetal@vsnl.net
+Email: info@samirmetal.com
